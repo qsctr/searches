@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+#container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.flex {
+    flex: 1;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.side-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.mdl-textfield {
+    margin: auto;
+    transform: scale(1.6);
+    max-width: calc((50vw - 32px) / 1.6);
+}
+
+.mdl-textfield__input {
+    font-family: 'Roboto';
+    color: rgb(220, 220, 220);
+}
+
+#choice-container {
+    padding: 8px;
+}
+
+.mdl-radio {
+    margin: 6px;
+    color: rgb(200, 200, 200);
+}
+
+.mdl-radio__label {
+    font-size: 18px;
+}
+
+#change-button-container {
+    height: 60px;
+}
+
+#change-button {
+    margin: auto;
+    color: rgb(220, 220, 220);
+    font-size: 16px;
+}
+
+#search-button {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+}
+
+#dialog {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 42;
+}
+
+#dialog-inner {
+    margin: auto;
+    min-height: 0;
+    width: auto;
+}
+
+#file-input {
+    font-family: 'Roboto';
+    font-size: 18px;
+    margin-bottom: 16px;
+}

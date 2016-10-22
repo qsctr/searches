@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Searches</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-teal.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="flex side-container">
+                <div class="center-content flex mdl-color--teal-500">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="start">
+                        <label class="mdl-textfield__label" for="start">Start</label>
+                    </div>
+                </div>
+                <div class="center-content flex mdl-color--teal-700">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="goal">
+                        <label class="mdl-textfield__label" for="goal">Goal</label>
+                    </div>
+                </div>
+                <div class="mdl-color--teal-900" id="choice-container">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bfs-rec">
+                        <input type="radio" id="bfs-rec" class="mdl-radio__button" name="search-type" value="bfs-rec" checked>
+                        <span class="mdl-radio__label">Breadth first search (recursive)</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bfs-no-rec">
+                        <input type="radio" id="bfs-no-rec" class="mdl-radio__button" name="search-type" value="bfs-no-rec">
+                        <span class="mdl-radio__label">Breadth first search (non-recursive)</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dfs-rec">
+                        <input type="radio" id="dfs-rec" class="mdl-radio__button" name="search-type" value="dfs-rec">
+                        <span class="mdl-radio__label">Depth first search (recursive)</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dfs-no-rec">
+                        <input type="radio" id="dfs-no-rec" class="mdl-radio__button" name="search-type" value="dfs-no-rec">
+                        <span class="mdl-radio__label">Depth first search (non-recursive)</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dls-rec">
+                        <input type="radio" id="dls-rec" class="mdl-radio__button" name="search-type" value="dls-rec">
+                        <span class="mdl-radio__label">Depth limited search (recursive)</span>
+                    </label>
+                    <!--<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dls-no-rec">
+                        <input type="radio" id="dls-no-rec" class="mdl-radio__button" name="search-type" value="dls-no-rec" disabled>
+                        <span class="mdl-radio__label">Depth limited search (non-recursive)</span>
+                    </label>-->
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ids-rec">
+                        <input type="radio" id="ids-rec" class="mdl-radio__button" name="search-type" value="ids-rec">
+                        <span class="mdl-radio__label">Iterative deepening search (recursive)</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ids-no-rec">
+                        <input type="radio" id="ids-no-rec" class="mdl-radio__button" name="search-type" value="ids-no-rec">
+                        <span class="mdl-radio__label">Iterative deepening search (non-recursive)</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex side-container">
+                <div class="flex mdl-color--cyan-900" id="log"></div>
+                <div class="center-content mdl-color--cyan-800" id="change-button-container">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--cyan-900" id="change-button">
+                        Change data file
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--deep-orange" id="search-button">
+            <i class="material-icons">search</i>
+        </button>
+        <div class="center-content" id="dialog">
+            <div class="mdl-card" id="dialog-inner">
+                <div class="mdl-card__title">
+                    <div class="mdl-card__title-text">Choose a file to read data from</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <input type="file" id="file-input">
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-js-button mdl-color-text--deep-orange" id="file-input-ok">
+                        OK
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="typescript/searches.js"></script>
+        <script src="typescript/ui.js"></script>
+    </body>
+</html>
