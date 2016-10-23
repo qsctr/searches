@@ -1,0 +1,6 @@
+{
+  "dependencies": {},
+  "globalDependencies": {
+    "mdl-materialsnackbar-typescript": "github:qsctr/mdl-materialsnackbar-typescript#a6961c0bfbd025a786f274588efd246e8f4dcbfa"
+  }
+}

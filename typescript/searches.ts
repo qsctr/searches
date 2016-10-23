@@ -1,5 +1,7 @@
 // Some searches for graphs
 
+'use strict';
+
 interface GraphNode {
     data: string;
     visited: boolean;
@@ -10,27 +12,15 @@ interface DataFormat {
     [data: string]: string[];
 }
 
-// const sampleData: DataFormat = {
-//     a: ['b', 'c'],
-//     b: ['d', 'e'],
-//     d: ['h', 'i'],
-//     e: ['j', 'k'],
-//     c: ['f', 'g'],
-//     f: ['l', 'm'],
-//     g: ['n', 'o'],
-//     h: [],
-//     i: [],
-//     j: [],
-//     k: [],
-//     l: [],
-//     m: [],
-//     n: [],
-//     o: []
-// };
-
 let currentGraphNodes: GraphNode[];
 
 function setGraphNodes(dataFormat: DataFormat) {
+    for (const data in dataFormat) {
+        if (!Array.isArray(dataFormat[data])
+            || dataFormat[data].some(child =>
+                typeof child !== 'string' || child.length === 0))
+            throw new Error(`Data ${data} must have an array of edges (non-empty strings)`);
+    }
     currentGraphNodes = Object.keys(dataFormat).map(data =>
         ({ data: data, visited: false, edges: [] as GraphNode[] }));
     for (const node of currentGraphNodes) {
@@ -45,6 +35,10 @@ function setGraphNodes(dataFormat: DataFormat) {
             if (!childNode.edges.includes(node))
                 childNode.edges.push(node);
         }
+        if (dataFormat[node.data].length === 0 &&
+            Object.keys(dataFormat).map(data => dataFormat[data])
+            .every(edges => !edges.includes(node.data)))
+            throw new Error(`Node ${node.data} isn't connected to any other nodes`);
     }
 }
 
@@ -59,7 +53,8 @@ function bfsNoRec(root: GraphNode, goal?: string): boolean {
     let fringe = [root];
     while (fringe.length !== 0) {
         const current = fringe.shift() as GraphNode;
-        console.log(current.data);
+        if (current.visited) continue;
+        println(current.data);
         if (current.data === goal) return true;
         current.visited = true;
         fringe = fringe.concat(current.edges.filter(child => !child.visited));
@@ -72,7 +67,8 @@ function bfsRec(fringe: GraphNode[] | GraphNode, goal?: string): boolean {
     if (!Array.isArray(fringe)) fringe = [fringe];
     if (fringe.length === 0) return false;
     const current = fringe.shift() as GraphNode;
-    console.log(current.data);
+    if (current.visited) return bfsRec(fringe, goal);
+    println(current.data);
     if (current.data === goal) return true;
     current.visited = true;
     return bfsRec(fringe.concat(current.edges.filter(child => !child.visited)), goal);
@@ -86,7 +82,8 @@ function dfsNoRec(root: GraphNode, goal?: string): boolean {
     let fringe = [root];
     while (fringe.length !== 0) {
         const current = fringe.pop() as GraphNode;
-        console.log(current.data);
+        if (current.visited) continue;
+        println(current.data);
         if (current.data === goal) return true;
         current.visited = true;
         fringe = fringe.concat(current.edges.filter(child => !child.visited).reverse());
@@ -96,7 +93,7 @@ function dfsNoRec(root: GraphNode, goal?: string): boolean {
 
 // Depth first search, recursive
 function dfsRec(node: GraphNode, goal?: string): boolean {
-    console.log(node.data);
+    println(node.data);
     if (node.data === goal) return true;
     node.visited = true;
     return node.edges.some(child => !child.visited && dfsRec(child, goal));
@@ -107,7 +104,7 @@ function dfsRec(node: GraphNode, goal?: string): boolean {
 // Depth limited search, recursive
 function dlsRec(node: GraphNode, limit: number, goal?: string, depth = 0): boolean | null {
     if (depth > limit) return null;
-    console.log(node.data);
+    println(node.data);
     if (node.data === goal) return true;
     node.visited = true;
     let anyNull = false;

@@ -1,6 +1,13 @@
 body {
     margin: 0;
-    font-family: 'Roboto';
+    font-family: 'Roboto', Arial;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+body.show {
+    opacity: 1;
 }
 
 #container {
@@ -28,14 +35,14 @@ body {
     flex-direction: column;
 }
 
-.mdl-textfield {
+.big-textfield {
     margin: auto;
     transform: scale(1.6);
     max-width: calc((50vw - 32px) / 1.6);
 }
 
 .mdl-textfield__input {
-    font-family: 'Roboto';
+    font-family: 'Roboto', Arial;
     color: rgb(220, 220, 220);
 }
 
@@ -44,7 +51,7 @@ body {
 }
 
 .mdl-radio {
-    margin: 6px;
+    margin: 8px;
     color: rgb(200, 200, 200);
 }
 
@@ -52,8 +59,49 @@ body {
     font-size: 18px;
 }
 
-#change-button-container {
+#dls-limit-textfield {
+    width: 0;
+    padding: 0;
+    transform: scale(1.2);
+}
+
+#dls-limit-textfield-break {
+    display: none;
+}
+
+#dls-rec-label.is-checked {
+    display: block;
+}
+
+#dls-rec-label.is-checked #dls-limit-textfield {
+    margin-left: 20px;
+    width: 180px;
+    padding: 20px 0;
+}
+
+#dls-rec-label.is-checked #dls-limit-textfield-break {
+    display: block;
+}
+
+#change-button-container, #current-file-name-container {
     height: 60px;
+}
+
+#current-file-name {
+    margin: auto;
+    font-size: 18px;
+    color: white;
+}
+
+#log {
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-width: 50vw;
+    color: white;
+    padding: 16px 32px;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: 'Consolas', monospace;
 }
 
 #change-button {
@@ -75,9 +123,8 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 42;
+    z-index: 41;
 }
 
 #dialog-inner {
@@ -87,7 +134,21 @@ body {
 }
 
 #file-input {
-    font-family: 'Roboto';
+    font-family: 'Roboto', Arial;
     font-size: 18px;
     margin-bottom: 16px;
+}
+
+#dialog-buttons {
+    text-align: right;
+}
+
+#file-input-ok {
+    font-size: 16px;
+}
+
+#snackbar {
+    font-size: 18px;
+    line-height: 24px;
+    z-index: 42;
 }

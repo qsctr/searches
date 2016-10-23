@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Searches</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-teal.min.css" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.lime-teal.min.css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
@@ -14,13 +14,14 @@
         <div id="container">
             <div class="flex side-container">
                 <div class="center-content flex mdl-color--teal-500">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="start">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label big-textfield" id="start-textfield">
+                        <input class="mdl-textfield__input" type="text" pattern id="start">
                         <label class="mdl-textfield__label" for="start">Start</label>
+                        <span class="mdl-textfield__error">Not a node</span>
                     </div>
                 </div>
                 <div class="center-content flex mdl-color--teal-700">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label big-textfield">
                         <input class="mdl-textfield__input" type="text" id="goal">
                         <label class="mdl-textfield__label" for="goal">Goal</label>
                     </div>
@@ -42,14 +43,16 @@
                         <input type="radio" id="dfs-no-rec" class="mdl-radio__button" name="search-type" value="dfs-no-rec">
                         <span class="mdl-radio__label">Depth first search (non-recursive)</span>
                     </label>
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dls-rec">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dls-rec" id="dls-rec-label">
                         <input type="radio" id="dls-rec" class="mdl-radio__button" name="search-type" value="dls-rec">
                         <span class="mdl-radio__label">Depth limited search (recursive)</span>
+                        <div id="dls-limit-textfield-break"></div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="dls-limit-textfield">
+                            <input class="mdl-textfield__input" type="text" pattern="[0-9]+" id="dls-limit">
+                            <label class="mdl-textfield__label" for="dls-limit">Limit</label>
+                            <span class="mdl-textfield__error">Limit must be a positive integer</span>
+                        </div>
                     </label>
-                    <!--<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="dls-no-rec">
-                        <input type="radio" id="dls-no-rec" class="mdl-radio__button" name="search-type" value="dls-no-rec" disabled>
-                        <span class="mdl-radio__label">Depth limited search (non-recursive)</span>
-                    </label>-->
                     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ids-rec">
                         <input type="radio" id="ids-rec" class="mdl-radio__button" name="search-type" value="ids-rec">
                         <span class="mdl-radio__label">Iterative deepening search (recursive)</span>
@@ -61,6 +64,9 @@
                 </div>
             </div>
             <div class="flex side-container">
+                <div class="center-content mdl-color--cyan-800" id="current-file-name-container">
+                    <div id="current-file-name"></div>
+                </div>
                 <div class="flex mdl-color--cyan-900" id="log"></div>
                 <div class="center-content mdl-color--cyan-800" id="change-button-container">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--cyan-900" id="change-button">
@@ -69,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--deep-orange" id="search-button">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--lime" id="search-button" disabled>
             <i class="material-icons">search</i>
         </button>
         <div class="center-content" id="dialog">
@@ -80,12 +86,16 @@
                 <div class="mdl-card__supporting-text">
                     <input type="file" id="file-input">
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-js-button mdl-color-text--deep-orange" id="file-input-ok">
+                <div class="mdl-card__actions mdl-card--border" id="dialog-buttons">
+                    <button class="mdl-button mdl-js-button" id="file-input-ok" disabled>
                         OK
-                    </a>
+                    </button>
                 </div>
             </div>
+        </div>
+        <div class="mdl-snackbar mdl-js-snackbar" id="snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
         </div>
         <script src="typescript/searches.js"></script>
         <script src="typescript/ui.js"></script>
