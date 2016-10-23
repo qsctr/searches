@@ -86,11 +86,11 @@ searchButton.addEventListener('click', () => {
     clearVisited();
     if (goalInput.value !== '') {
         if (res === null) {
-            println('--> No solution found within the depth limit');
+            println('--> Goal not found within the depth limit');
         } else if (res) {
-            println('--> Solution found');
+            println('--> Goal found');
         } else {
-            println('--> No solution found');
+            println('--> Goal not found');
         }
     }
 });
